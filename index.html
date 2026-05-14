@@ -49,10 +49,14 @@
     align-self: start;
     max-height: calc(100vh - 64px);
     overflow-y: auto;
+    overflow-x: hidden;
     padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
   }
-  aside.sidebar::-webkit-scrollbar { width: 6px; }
+  aside.sidebar::-webkit-scrollbar { width: 6px; height: 0; }
   aside.sidebar::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  aside.sidebar::-webkit-scrollbar-track { background: transparent; }
 
   .side-brand {
     font-family: var(--mono);
@@ -398,15 +402,15 @@
     <div class="side-title">Inventario de flows</div>
     <nav class="toc" id="toc">
       <ol>
-        <li><a href="#lead-nurturing">Lead Nurturing<span class="toc-meta">7 emails · 15 días</span></a></li>
-        <li><a href="#cross-selling-almohadas">Cross-selling almohadas<span class="toc-meta">2 emails · 17 días</span></a></li>
-        <li><a href="#up-selling-base-tapizada">Up-selling base tapizada<span class="toc-meta">2 emails · 35 días</span></a></li>
-        <li><a href="#cxa-90-days">CXA 90 Days<span class="toc-meta">2 emails · 90–91 días</span></a></li>
-        <li><a href="#babybed-50x80">Babybed 50×80<span class="toc-meta">1 email · 60 días</span></a></li>
-        <li><a href="#babybed-60x120-70x140">Babybed 60×120 / 70×140<span class="toc-meta">1 email · 91 días</span></a></li>
-        <li><a href="#carrito-abandonado">Carrito abandonado<span class="toc-meta">1 email</span></a></li>
-        <li><a href="#pedido-abandonado">Pedido abandonado<span class="toc-meta">1 email</span></a></li>
-        <li><a href="#navegacion-abandonada">Navegación de producto abandonada<span class="toc-meta">1 email</span></a></li>
+        <li><a href="#lead-nurturing">Lead Nurturing</a></li>
+        <li><a href="#cross-selling-almohadas">Cross-sell almohadas</a></li>
+        <li><a href="#up-selling-base-tapizada">Up-sell base</a></li>
+        <li><a href="#cxa-90-days">CXA 90 Days</a></li>
+        <li><a href="#babybed-50x80">Babybed 50×80</a></li>
+        <li><a href="#babybed-60x120-70x140">Babybed 60×120 / 70×140</a></li>
+        <li><a href="#carrito-abandonado">Carrito abandonado</a></li>
+        <li><a href="#pedido-abandonado">Pedido abandonado</a></li>
+        <li><a href="#navegacion-abandonada">Navegación abandonada</a></li>
       </ol>
     </nav>
   </aside>
