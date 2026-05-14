@@ -16,8 +16,6 @@
     --rule: #d9d4ca;
     --paper: #ffffff;
     --accent: #1d3a78;
-    --warn: #b04a2f;
-    --good: #2f7d3e;
     --tag: #e8e2d4;
     --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   }
@@ -32,6 +30,7 @@
     -webkit-font-smoothing: antialiased;
   }
   .wrap { max-width: 980px; margin: 0 auto; padding: 56px 28px 96px; }
+
   header.masthead {
     border-bottom: 1px solid var(--rule);
     padding-bottom: 28px;
@@ -57,120 +56,100 @@
     font-size: 15px;
     max-width: 56ch;
   }
-  .meta-row {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-    font-size: 13px;
-    color: var(--ink-soft);
-  }
-  .meta-row span b { color: var(--ink); font-weight: 600; }
+
   nav.toc {
     background: var(--paper);
     border: 1px solid var(--rule);
     border-radius: 4px;
-    padding: 18px 22px;
-    margin-bottom: 56px;
+    padding: 22px 26px;
+    margin-bottom: 64px;
   }
   nav.toc h2 {
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     color: var(--ink-soft);
     font-weight: 600;
   }
-  nav.toc ol { margin: 0; padding-left: 22px; }
-  nav.toc li { margin: 4px 0; font-size: 14px; }
-  nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
+  nav.toc ol { margin: 0; padding: 0; list-style: none; counter-reset: tocnum; }
+  nav.toc li {
+    counter-increment: tocnum;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 15px;
+  }
+  nav.toc li:last-child { border-bottom: none; }
+  nav.toc li::before {
+    content: counter(tocnum, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    flex: 0 0 28px;
+  }
+  nav.toc a {
+    color: var(--ink);
+    text-decoration: none;
+    flex: 1;
+    border-bottom: 1px solid transparent;
+  }
   nav.toc a:hover { border-bottom-color: var(--accent); }
-  nav.toc li.pending { color: var(--ink-soft); }
-  nav.toc li.pending::after { content: " — pendiente"; font-style: italic; font-size: 12px; color: var(--ink-soft); }
+  nav.toc .toc-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    flex: 0 0 auto;
+  }
+
   section.flow {
-    margin-bottom: 80px;
-    padding-top: 24px;
+    margin-bottom: 84px;
+    padding-top: 28px;
     border-top: 2px solid var(--ink);
   }
-  .flow-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; }
+  .flow-head { margin-bottom: 8px; }
+  .flow-head .kicker { margin-bottom: 4px; }
   .flow-head h2 {
     font-family: "Fraunces", Georgia, serif;
     font-weight: 500;
     font-size: 30px;
-    margin: 6px 0 2px;
+    margin: 0 0 8px;
     letter-spacing: -0.01em;
   }
-  .status {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-  .status.active { background: #d8eedd; color: var(--good); }
-  .status.draft { background: var(--tag); color: var(--ink-soft); }
-  .flow-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0;
-    margin: 22px 0 28px;
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--paper);
-  }
-  .flow-meta dt {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .flow-sub {
     color: var(--ink-soft);
-    padding: 12px 14px 4px;
+    font-size: 14px;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
   }
-  .flow-meta dd {
-    margin: 0;
-    padding: 0 14px 12px;
-    font-size: 15px;
-    font-weight: 500;
-  }
-  .flow-meta .cell { border-right: 1px solid var(--rule); }
-  .flow-meta .cell:last-child { border-right: none; }
-  .flow-meta .cell.warn dd { color: var(--warn); }
+
   .timeline {
-    margin: 28px 0 36px;
+    margin: 28px 0 24px;
     padding: 22px 22px 14px;
     background: var(--paper);
     border: 1px solid var(--rule);
     border-radius: 4px;
-  }
-  .timeline h3 {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 0 0 14px;
-    font-weight: 600;
   }
   .tl-track {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 0 28px;
+    padding: 4px 0 22px;
   }
   .tl-track::before {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 17px;
     left: 12px;
     right: 12px;
     height: 2px;
     background: var(--rule);
-    transform: translateY(-50%);
   }
   .tl-node {
     position: relative;
@@ -179,8 +158,8 @@
     flex: 0 0 auto;
   }
   .tl-dot {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--paper);
     border: 2px solid var(--accent);
@@ -198,23 +177,25 @@
     font-family: var(--mono);
     font-size: 10px;
     color: var(--ink-soft);
-    margin-top: 6px;
+    margin-top: 8px;
     letter-spacing: 0.06em;
   }
   .tl-label {
     font-size: 11px;
     color: var(--ink);
     margin-top: 2px;
-    max-width: 80px;
+    max-width: 86px;
   }
-  .email {
+
+  article.email {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 260px 1fr;
     gap: 32px;
-    padding: 32px 0;
+    padding: 28px 0;
     border-top: 1px solid var(--rule);
+    align-items: start;
   }
-  .email:last-of-type { border-bottom: 1px solid var(--rule); }
+  article.email:last-of-type { border-bottom: 1px solid var(--rule); }
   .email-shot {
     background: var(--paper);
     border: 1px solid var(--rule);
@@ -222,13 +203,7 @@
     overflow: hidden;
   }
   .email-shot img { width: 100%; display: block; }
-  .email-body h3 {
-    font-family: "Fraunces", Georgia, serif;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 1.25;
-    margin: 0 0 6px;
-  }
+
   .email-num {
     font-family: var(--mono);
     font-size: 11px;
@@ -237,45 +212,35 @@
     color: var(--ink-soft);
     margin-bottom: 6px;
   }
-  .email-meta {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin: 14px 0 18px;
-    font-size: 13px;
+  .email-body h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+  .email-summary {
     color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 14px;
+    max-width: 56ch;
   }
-  .email-meta b { color: var(--ink); font-weight: 600; }
-  .email-copy { font-size: 14px; color: var(--ink-soft); }
-  .email-copy p { margin: 0 0 10px; }
-  .cta-line {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink);
-    margin-top: 10px;
-    padding: 8px 12px;
-    background: var(--tag);
-    border-radius: 3px;
-    display: inline-block;
-  }
-  .findings {
-    margin-top: 40px;
-    padding: 22px 26px;
-    background: #fdf6e8;
-    border-left: 3px solid #d4a945;
-    border-radius: 0 4px 4px 0;
-  }
-  .findings h3 {
+  .email-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     font-family: var(--mono);
     font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin: 0 0 12px;
-    color: #7a5a0e;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
   }
-  .findings ul { margin: 0; padding-left: 20px; }
-  .findings li { margin: 8px 0; font-size: 14px; }
-  .findings li b { color: var(--ink); }
+  .email-tags span {
+    background: var(--tag);
+    padding: 4px 10px;
+    border-radius: 3px;
+  }
+  .email-tags span b { color: var(--ink); font-weight: 600; }
+
   footer.site {
     margin-top: 80px;
     padding-top: 24px;
@@ -285,13 +250,17 @@
     font-family: var(--mono);
     letter-spacing: 0.04em;
   }
+
   @media (max-width: 720px) {
     .wrap { padding: 36px 18px 64px; }
     h1 { font-size: 34px; }
-    .email { grid-template-columns: 1fr; gap: 18px; }
-    .email-shot { max-width: 320px; }
-    .tl-track { overflow-x: auto; gap: 28px; justify-content: flex-start; padding-bottom: 36px; }
+    article.email { grid-template-columns: 1fr; gap: 16px; }
+    .email-shot { max-width: 280px; }
+    .tl-track { overflow-x: auto; gap: 28px; justify-content: flex-start; padding-bottom: 28px; }
+    .tl-track::before { display: none; }
     .tl-label { display: none; }
+    nav.toc li { flex-wrap: wrap; }
+    nav.toc .toc-meta { flex: 1 0 100%; padding-left: 42px; }
   }
 </style>
 </head>
@@ -299,966 +268,340 @@
 <div class="wrap">
 
   <header class="masthead">
-    <div class="kicker">Dormideo · Email Flows · Interno Incubalia</div>
+    <div class="kicker">Dormideo · Email Flows</div>
     <h1>Inventario de flows de email — España</h1>
-    <p class="sub">Mapa operativo de los flows automatizados activos en Dormideo España. Cada flow se documenta con trigger, timing, KPIs de los últimos 30 días, contenido de cada email y hallazgos relevantes.</p>
-    <div class="meta-row">
-      <span><b>Mercado:</b> España</span>
-      <span><b>Última actualización:</b> 14 may 2026</span>
-    </div>
+    <p class="sub">Listado de emails que componen cada flow automatizado activo en Dormideo España. Asunto, día de envío y captura de cada email.</p>
   </header>
 
   <nav class="toc">
-    <h2>Flows documentados</h2>
+    <h2>Flows</h2>
     <ol>
-      <li><a href="#lead-nurturing">Lead Nurturing — 7 emails / 15 días</a></li>
-      <li><a href="#cross-selling-almohadas">Cross-selling almohadas — 2 emails / 17 días</a></li>
-      <li><a href="#up-selling-base-tapizada">Up-selling base tapizada — 2 emails / 35 días</a></li>
-      <li><a href="#cxa-90-days">CXA 90 Days — 2 ramas paralelas</a></li>
-      <li><a href="#babybed-50x80">Workflow upsells babybed 50×80 — 1 email / 60 días</a></li>
-      <li><a href="#babybed-60x120-70x140">Workflow upsells babybed 60×120 / 70×140 — 1 email / 91 días</a></li>
-      <li><a href="#carrito-abandonado">Carrito abandonado — 1 email visible (timing pendiente)</a></li>
-      <li><a href="#pedido-abandonado">Pedido abandonado — 1 email visible (timing pendiente)</a></li>
-      <li><a href="#navegacion-abandonada">Navegación de producto abandonada — 1 email visible (timing pendiente)</a></li>
+      <li><a href="#lead-nurturing">Lead Nurturing</a><span class="toc-meta">7 emails · 15 días</span></li>
+      <li><a href="#cross-selling-almohadas">Cross-selling almohadas</a><span class="toc-meta">2 emails · 17 días</span></li>
+      <li><a href="#up-selling-base-tapizada">Up-selling base tapizada</a><span class="toc-meta">2 emails · 35 días</span></li>
+      <li><a href="#cxa-90-days">CXA 90 Days</a><span class="toc-meta">2 emails · 90–91 días</span></li>
+      <li><a href="#babybed-50x80">Workflow upsells babybed 50×80</a><span class="toc-meta">1 email · 60 días</span></li>
+      <li><a href="#babybed-60x120-70x140">Workflow upsells babybed 60×120 / 70×140</a><span class="toc-meta">1 email · 91 días</span></li>
+      <li><a href="#carrito-abandonado">Carrito abandonado</a><span class="toc-meta">1 email</span></li>
+      <li><a href="#pedido-abandonado">Pedido abandonado</a><span class="toc-meta">1 email</span></li>
+      <li><a href="#navegacion-abandonada">Navegación de producto abandonada</a><span class="toc-meta">1 email</span></li>
     </ol>
   </nav>
 
+  <!-- 01 · Lead Nurturing -->
   <section class="flow" id="lead-nurturing">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 01</div>
-        <h2>Lead Nurturing</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 01</div>
+      <h2>Lead Nurturing</h2>
+      <div class="flow-sub">7 emails · 15 días</div>
     </div>
 
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Customer abandons checkout</dd>
-      </div>
-      <div class="cell">
-        <dt>Duración</dt>
-        <dd>15 días · 7 emails</dd>
-      </div>
-    </dl>
-
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Checkout abandonado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">DÍA 1</div>
-          <div class="tl-label">Guía colchón</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">2</div>
-          <div class="tl-day">DÍA 2</div>
-          <div class="tl-label">Visco vs muelles</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">3</div>
-          <div class="tl-day">DÍA 3</div>
-          <div class="tl-label">Visco vs látex</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">4</div>
-          <div class="tl-day">DÍA 4</div>
-          <div class="tl-label">Top ventas</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">5</div>
-          <div class="tl-day">DÍA 7</div>
-          <div class="tl-label">Cupón -5%</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">6</div>
-          <div class="tl-day">DÍA 8</div>
-          <div class="tl-label">Reseñas</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">7</div>
-          <div class="tl-day">DÍA 15</div>
-          <div class="tl-label">CSAT</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 1</div><div class="tl-label">Guía colchón</div></div>
+        <div class="tl-node"><div class="tl-dot">2</div><div class="tl-day">DÍA 2</div><div class="tl-label">Visco vs muelles</div></div>
+        <div class="tl-node"><div class="tl-dot">3</div><div class="tl-day">DÍA 3</div><div class="tl-label">Visco vs látex</div></div>
+        <div class="tl-node"><div class="tl-dot">4</div><div class="tl-day">DÍA 4</div><div class="tl-label">Top ventas</div></div>
+        <div class="tl-node"><div class="tl-dot">5</div><div class="tl-day">DÍA 7</div><div class="tl-label">Cupón −5 %</div></div>
+        <div class="tl-node"><div class="tl-dot">6</div><div class="tl-day">DÍA 8</div><div class="tl-label">Reseñas</div></div>
+        <div class="tl-node"><div class="tl-dot">7</div><div class="tl-day">DÍA 15</div><div class="tl-label">Opinión</div></div>
       </div>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-1.png" alt="Email 1 — guía colchón" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
         <div class="email-num">Email 1 · Día 1</div>
         <h3>{nombre}, descubre tu colchón ideal con nuestra guía oficial</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> Empieza a descansar mejor desde la primera noche</span>
-          <span><b>Espera al siguiente:</b> 1 día</span>
-        </div>
-        <div class="email-copy">
-          <p>Hero editorial con dormitorio + colchón. Bajada: <em>«Te explicamos cómo elegir el colchón ideal para ti»</em>.</p>
-          <p>Cuerpo: «Sabemos que quizás estás buscando un colchón pero puede que necesites un poco de ayuda. Así que te enviamos nuestra guía con los mejores consejos para que escojas el colchón ideal para ti y no te equivoques.»</p>
-          <div class="cta-line">CTA · Ver guía completa / Descubrir más</div>
-        </div>
+        <p class="email-summary">Guía editorial para elegir colchón. Sin presión comercial.</p>
+        <div class="email-tags"><span><b>Día:</b> 1</span><span><b>Hasta el siguiente:</b> 1 día</span><span><b>CTA:</b> Descubrir más</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-2.png" alt="Email 2 — viscoelástico vs muelles" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-2.png" alt="Email 2" /></div>
       <div class="email-body">
         <div class="email-num">Email 2 · Día 2</div>
         <h3>¿Viscoelástico o muelles? Depende…</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> Depende de cómo duermas. Te explicamos cuál te conviene más</span>
-          <span><b>Espera al siguiente:</b> 1 día</span>
-        </div>
-        <div class="email-copy">
-          <p>Comparador visual de dos modelos lado a lado (visco vs muelles).</p>
-          <p>Cuerpo: «Muchos de nuestros clientes nos plantean esta pregunta antes de comprar su próximo colchón. […] puedes hacer clic en el siguiente botón para saber qué opción deberías elegir.»</p>
-          <div class="cta-line">CTA · Ver comparativa / Descubrir más</div>
-        </div>
+        <p class="email-summary">Comparativa visual de los dos tipos de colchón más vendidos.</p>
+        <div class="email-tags"><span><b>Día:</b> 2</span><span><b>Hasta el siguiente:</b> 1 día</span><span><b>CTA:</b> Descubrir más</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-3.png" alt="Email 3 — viscoelástico vs látex" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-3.png" alt="Email 3" /></div>
       <div class="email-body">
         <div class="email-num">Email 3 · Día 3</div>
         <h3>¿Viscoelástica o látex? una cuestión muy infravalorada</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> Depende de cómo duermes. Te explicamos cuál te conviene más</span>
-          <span><b>Espera al siguiente:</b> 1 día</span>
-        </div>
-        <div class="email-copy">
-          <p>Mismo layout que Email 2 con dos modelos (Elixir New vs House Látex).</p>
-          <p>Cuerpo: «¿Has probado alguna vez los colchones de látex? Muchos no los conocen y son una opción muy confortable que al menos se debería considerar por sus excelentes propiedades.»</p>
-          <div class="cta-line">CTA · Ver comparativa / Descubrir más</div>
-        </div>
+        <p class="email-summary">Comparativa Elixir New (visco) vs House Látex.</p>
+        <div class="email-tags"><span><b>Día:</b> 3</span><span><b>Hasta el siguiente:</b> 1 día</span><span><b>CTA:</b> Descubrir más</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-4.png" alt="Email 4 — los más deseados" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-4.png" alt="Email 4" /></div>
       <div class="email-body">
         <div class="email-num">Email 4 · Día 4</div>
         <h3>Cómpralo hoy, descansa mañana</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1 in-email:</b> Los más deseados</span>
-          <span><b>Espera al siguiente:</b> 3 días</span>
-        </div>
-        <div class="email-copy">
-          <p>Pivote a producto: «Conoce los colchones más vendidos de Dormideo». Carrusel con 3 productos destacados:</p>
-          <p>· <b>Colchón Viscoelástico City Luxury</b> · 437,06 € → <b>175,18 €</b><br />
-             · <b>Colchón Ecológico EcoNature</b> · 402,16 € → <b>240,00 €</b><br />
-             · <b>Colchón Viscoelástico Elixir New</b> · 535,55 € → <b>255,98 €</b></p>
-          <div class="cta-line">CTA · Comprar ya</div>
-        </div>
+        <p class="email-summary">Carrusel con los 3 colchones más vendidos: City Luxury, EcoNature, Elixir New.</p>
+        <div class="email-tags"><span><b>Día:</b> 4</span><span><b>Hasta el siguiente:</b> 3 días</span><span><b>CTA:</b> Comprar ya</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-5.png" alt="Email 5 — cupón COLCHONES-5" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-5.png" alt="Email 5" /></div>
       <div class="email-body">
         <div class="email-num">Email 5 · Día 7</div>
         <h3>Última oportunidad para ahorrar</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> COLCHONES-5 · 5 % de descuento</span>
-          <span><b>Espera al siguiente:</b> 1 día</span>
-        </div>
-        <div class="email-copy">
-          <p>Cupón <b>COLCHONES-5</b> · -5 % en colchones seleccionados. Refuerzos: entrega rápida, 100 noches de prueba, hasta 10 años de garantía.</p>
-          <p>«Utiliza el código COLCHONES-5 en la pantalla de pago, o haz clic en el enlace a continuación para aplicar automáticamente el descuento a tu pedido.»</p>
-          <div class="cta-line">CTA · Ver colchones en oferta / Aplicar descuento</div>
-        </div>
+        <p class="email-summary">Cupón <b>COLCHONES-5</b> · −5 % en colchones seleccionados.</p>
+        <div class="email-tags"><span><b>Día:</b> 7</span><span><b>Hasta el siguiente:</b> 1 día</span><span><b>CTA:</b> Aplicar descuento</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-6.png" alt="Email 6 — reseñas" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-6.png" alt="Email 6" /></div>
       <div class="email-body">
         <div class="email-num">Email 6 · Día 8</div>
         <h3>Nuestros clientes hablan de nosotros</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> Nuestros clientes hablan de nosotros</span>
-          <span><b>Espera al siguiente:</b> 7 días</span>
-        </div>
-        <div class="email-copy">
-          <p>Social proof. «Puedes ver las opiniones de gente que ha estado en tu situación para que compruebes con tus propios ojos como les ha ido. Todas las reseñas provienen tanto de Amazon como de nuestra propia web, verificadas y reales.»</p>
-          <p>Reseñas 5★ destacadas: Juan Antonio González (City Luxury), Celine Socquet (entrega 24h), Purificación Martínez (Elixir New), Georgia (compra verificada).</p>
-          <div class="cta-line">CTA · (sin botón principal, reseñas in-line)</div>
-        </div>
+        <p class="email-summary">Reseñas verificadas de Amazon y web propia (City Luxury, Elixir New).</p>
+        <div class="email-tags"><span><b>Día:</b> 8</span><span><b>Hasta el siguiente:</b> 7 días</span><span><b>CTA:</b> Sin botón principal</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/lead-nurturing/email-7.png" alt="Email 7 — CSAT" /></div>
+      <div class="email-shot"><img src="assets/lead-nurturing/email-7.png" alt="Email 7" /></div>
       <div class="email-body">
         <div class="email-num">Email 7 · Día 15 · Final</div>
         <h3>Valoramos tu opinión</h3>
-        <div class="email-meta">
-          <span><b>Preview:</b> Valoramos tu opinión</span>
-          <span><b>Espera al siguiente:</b> —</span>
-        </div>
-        <div class="email-copy">
-          <p>Email de feedback con dos CTAs polares.</p>
-          <p>«Con el fin de mejorar nuestro servicio, nos gustaría saber cómo ha sido tu experiencia con nosotros hasta hoy.»</p>
-          <div class="cta-line">CTA verde · Dejar comentario positivo &nbsp;·&nbsp; CTA rojo · Dejar comentario negativo</div>
-        </div>
+        <p class="email-summary">Email de feedback con dos CTAs polares (positivo / negativo).</p>
+        <div class="email-tags"><span><b>Día:</b> 15</span><span><b>Final del flow</b></span><span><b>CTA:</b> Comentario + / −</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Lead Nurturing</h3>
-      <ul>
-        <li><b>Nombre vs trigger no cuadran.</b> El flow se llama «Lead Nurturing» pero se dispara con <em>Customer abandons checkout</em>. La audiencia no son leads fríos: son carritos abandonados a un paso de comprar. Toda la línea editorial (guías, comparativas) está calibrada para alguien que aún no sabe qué quiere, no para alguien que ya estaba pagando.</li>
-        <li><b>0 pedidos atribuidos en 30 días con 1.104 envíos y CTR 5,81 %.</b> Click rate decente, conversión nula. Indica desajuste entre lo que el email promete (educación) y lo que el usuario quería al abandonar checkout (resolver una fricción concreta — precio, entrega, método de pago, talla).</li>
-        <li><b>Email 7 (CSAT) está fuera de lugar.</b> Pedir feedback de experiencia a un usuario que <em>no ha comprado</em> es incoherente; los CTA «comentario positivo / negativo» asumen un cliente. Debería moverse al post-purchase flow.</li>
-        <li><b>Densidad alta al inicio (4 emails en 4 días) y silencio largo entre Email 6 y 7</b> (7 días). El gap de una semana antes del CSAT pierde a la mayoría de la cohorte.</li>
-        <li><b>Único incentivo monetario en Email 5 (-5 %).</b> Cupón modesto y aparece en día 7. Si el bloqueo es precio, llega tarde y es pequeño respecto a lo que se ve en mercado.</li>
-        <li><b>Pendientes de confirmar:</b> exit conditions del flow (¿salen al comprar?, ¿al desuscribirse?), filtros de entrada extra (valor mínimo del carrito, geo, idioma), y si convive con el flow «Carrito abandonado» — si ambos se disparan a la vez puede haber solapamiento de envíos.</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 02 · Cross-selling almohadas -->
   <section class="flow" id="cross-selling-almohadas">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 02</div>
-        <h2>Cross-selling almohadas</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 02</div>
+      <h2>Cross-selling almohadas</h2>
+      <div class="flow-sub">2 emails · 17 días</div>
     </div>
 
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Pedido pagado (compra de colchón)</dd>
-      </div>
-      <div class="cell">
-        <dt>Duración</dt>
-        <dd>17 días · 2 emails</dd>
-      </div>
-      <div class="cell">
-        <dt>Exit condition</dt>
-        <dd>Tag <code>comprador_almohada</code></dd>
-      </div>
-      <div class="cell">
-        <dt>Producto objetivo</dt>
-        <dd>Pack almohada + protector</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Cupón DESCANSO5 (-5 %)</dd>
-      </div>
-    </dl>
-
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Pedido pagado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">DÍA 14</div>
-          <div class="tl-label">Cross-sell soft</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">2</div>
-          <div class="tl-day">DÍA 17</div>
-          <div class="tl-label">Cupón -5%</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 14</div><div class="tl-label">Packs almohada</div></div>
+        <div class="tl-node"><div class="tl-dot">2</div><div class="tl-day">DÍA 17</div><div class="tl-label">Cupón −5 %</div></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Antes de cada email se evalúa si el contacto tiene el tag <code>comprador_almohada</code>. Si lo tiene, el flow sale sin enviar.</p>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/cross-selling-almohadas/email-1.png" alt="Email 1 — packs almohada + protector" /></div>
+      <div class="email-shot"><img src="assets/cross-selling-almohadas/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
         <div class="email-num">Email 1 · Día 14</div>
         <h3>{nombre}, lleva tu descanso al siguiente nivel</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> Lleva tu descanso al siguiente nivel con estos packs nuevos</span>
-          <span><b>Espera al siguiente:</b> 3 días</span>
-        </div>
-        <div class="email-copy">
-          <p>«{nombre}, prepárate para soñar.»</p>
-          <p>«Dile adiós a tu <b>vieja almohada</b> y renueva <b>almohada + protector al mejor precio</b>.»</p>
-          <p>Visual: almohada + protector colchón unidos con un «+». Bajada: «Alivia los problemas de cervicales, cabeza, estrés o migraña y cuida la higiene de tu colchón.»</p>
-          <div class="cta-line">CTA · Ver packs</div>
-        </div>
+        <p class="email-summary">Promoción packs almohada + protector, sin descuento.</p>
+        <div class="email-tags"><span><b>Día:</b> 14</span><span><b>Hasta el siguiente:</b> 3 días</span><span><b>CTA:</b> Ver packs</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/cross-selling-almohadas/email-2.png" alt="Email 2 — cupón DESCANSO5" /></div>
+      <div class="email-shot"><img src="assets/cross-selling-almohadas/email-2.png" alt="Email 2" /></div>
       <div class="email-body">
         <div class="email-num">Email 2 · Día 17 · Final</div>
         <h3>{nombre}, tenemos algo para ti</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> Lleva tu descanso al siguiente nivel con un buen descuento</span>
-          <span><b>Espera al siguiente:</b> —</span>
-        </div>
-        <div class="email-copy">
-          <p>«{nombre}, prepárate para soñar.»</p>
-          <p>Justificación del incentivo: «No solemos hacer descuentos en almohadas y complementos. Pero hace poco decidiste confiar en nosotros comprando colchones Dormideo, así que aquí va un pequeño regalo de nuestra parte. <b>DESCANSO5</b>, sólo se puede usar una vez.»</p>
-          <p>Banner cupón <b>-5 % con el cupón DESCANSO5</b> sobre la imagen del pack.</p>
-          <div class="cta-line">CTA · Quiero mi pack con descuento</div>
-        </div>
+        <p class="email-summary">Cupón <b>DESCANSO5</b> · −5 % sobre el pack almohada + protector. Uso único.</p>
+        <div class="email-tags"><span><b>Día:</b> 17</span><span><b>Final del flow</b></span><span><b>CTA:</b> Quiero mi pack con descuento</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Cross-selling almohadas</h3>
-      <ul>
-        <li><b>Exit condition real y efectiva.</b> A diferencia de otros flows con tag, aquí el tag <code>comprador_almohada</code> sí cierra el bucle: el producto objetivo (almohada) coincide con el tag que se aplica al comprarla. No hay riesgo de spam al comprador convertido.</li>
-        <li><b>Solo 2 emails para un cross-sell de bajo precio.</b> Razonable para no quemar la lista, pero el segundo (y único con incentivo) llega a día 17. Si el usuario decidió comprar almohada por su cuenta antes, el tag lo saca; si no, queda toda la ventana sin recordatorio entre día 0 y día 14.</li>
-        <li><b>Ventana de 14 días antes del primer envío</b> alinea con la llegada del colchón y los primeros días de uso — momento donde la fricción almohada-vieja se hace evidente. Buen timing conceptual.</li>
-        <li><b>Cupón -5 % es modesto</b> pero el copy lo justifica explícitamente («no solemos hacer descuentos», «sólo se puede usar una vez»). El framing de regalo personalizado eleva el valor percibido por encima del 5 %.</li>
-        <li><b>Pendientes de confirmar:</b> ¿qué porcentaje de la cohorte sale por tag antes del Email 1?, ¿se trackea revenue atribuido por flow?, ¿hay variantes por tipo de colchón comprado (viscoelástico vs muelles) o se usa el mismo creative para todos?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 03 · Up-selling base tapizada -->
   <section class="flow" id="up-selling-base-tapizada">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 03</div>
-        <h2>Up-selling base tapizada</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 03</div>
+      <h2>Up-selling base tapizada</h2>
+      <div class="flow-sub">2 emails · 35 días</div>
     </div>
 
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Pedido pagado (colchón de muelles)</dd>
-      </div>
-      <div class="cell">
-        <dt>Duración</dt>
-        <dd>35 días · 2 emails</dd>
-      </div>
-      <div class="cell">
-        <dt>Filtro entrada</dt>
-        <dd><code>comprador_colchon_muelles</code> ∧ ¬<code>comprador_base</code></dd>
-      </div>
-      <div class="cell">
-        <dt>Exit condition</dt>
-        <dd>Tag <code>comprador_base</code></dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Cupón BASES-5 (-5 %)</dd>
-      </div>
-    </dl>
-
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Pedido pagado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">DÍA 28</div>
-          <div class="tl-label">Educación + producto</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">2</div>
-          <div class="tl-day">DÍA 35</div>
-          <div class="tl-label">Cupón -5 %</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 28</div><div class="tl-label">Educación</div></div>
+        <div class="tl-node"><div class="tl-dot">2</div><div class="tl-day">DÍA 35</div><div class="tl-label">Cupón −5 %</div></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Doble check de tags. Email 1 solo sale si el cliente compró colchón de muelles <em>y</em> aún no tiene base. Email 2 solo sale si tras Email 1 sigue sin haber comprado base.</p>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/up-selling-base-tapizada/email-1.png" alt="Email 1 — mejora el confort de tu colchón de muelles" /></div>
+      <div class="email-shot"><img src="assets/up-selling-base-tapizada/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
         <div class="email-num">Email 1 · Día 28</div>
         <h3>{nombre} ¿Qué tal con tu colchón de muelles ensacados?</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> Mejora el confort de tu colchón de muelles ensacados</span>
-          <span><b>Espera al siguiente:</b> 7 días</span>
-        </div>
-        <div class="email-copy">
-          <p>Tono educativo, sin descuento. Postura: la base tapizada como complemento técnico del colchón de muelles.</p>
-          <p>«¿Sabías que los colchones de <b>muelles ensacados</b> se recomienda <b>utilizarlos encima de una base tapizada</b>? Una base tapizada es el mejor soporte para éstos porque consigue un mejor apoyo y firmeza.»</p>
-          <p>«Muchas personas <b>desconocen esto</b> y en Dormideo destacamos por aportar los mejores consejos a nuestros clientes para <b>garantizarles un descanso óptimo</b>. Además, utilizar tu colchón de muelles ensacados junto a una base tapizada <b>evita su deformación</b> con el paso de los años.»</p>
-          <p>Cierra mostrando selección de bases con «Altamente transpirables».</p>
-          <div class="cta-line">CTA · (selección de bases tapizadas)</div>
-        </div>
+        <p class="email-summary">Argumentario técnico: por qué el muelles ensacados rinde mejor sobre base tapizada. Sin descuento.</p>
+        <div class="email-tags"><span><b>Día:</b> 28</span><span><b>Hasta el siguiente:</b> 7 días</span><span><b>CTA:</b> Ver bases tapizadas</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/up-selling-base-tapizada/email-2.png" alt="Email 2 — cupón BASES-5" /></div>
+      <div class="email-shot"><img src="assets/up-selling-base-tapizada/email-2.png" alt="Email 2" /></div>
       <div class="email-body">
         <div class="email-num">Email 2 · Día 35 · Final</div>
         <h3>{nombre} ¿Te vas a aprovechar?</h3>
-        <div class="email-meta">
-          <span><b>Preview / H2:</b> Las más deseadas · -5 % en bases tapizadas</span>
-          <span><b>Espera al siguiente:</b> —</span>
-        </div>
-        <div class="email-copy">
-          <p>«Puede que todavía te interese <b>mejorar tu colchón de muelles ensacados</b> con una de nuestras bases.»</p>
-          <p>«Así que si aún no te habías decidido, ahora puede que sea el momento de hacerlo y <b>ahorrarte un 5 %</b> en tu próxima base tapizada.»</p>
-          <p>Banner <b>BASES-5</b> · -5 % de descuento en bases tapizadas seleccionadas. Refuerzos: entrega rápida, calidad duradera.</p>
-          <p>«Copia y pega el cupón <b>BASES-5</b> durante el proceso de pago para conseguir un 5 % de descuento.»</p>
-          <div class="cta-line">CTA · Ver bases tapizadas</div>
-        </div>
+        <p class="email-summary">Cupón <b>BASES-5</b> · −5 % en bases tapizadas seleccionadas.</p>
+        <div class="email-tags"><span><b>Día:</b> 35</span><span><b>Final del flow</b></span><span><b>CTA:</b> Ver bases tapizadas</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Up-selling base tapizada</h3>
-      <ul>
-        <li><b>Lógica de entrada/salida más sólida de los tres flows post-compra.</b> Doble check de tags: entra solo quien lo necesita técnicamente (muelles ensacados) y no tiene ya base; sale automáticamente al convertir. Cero envíos a comprador equivocado.</li>
-        <li><b>Email 1 sin descuento es la decisión correcta.</b> El argumento es técnico («muelles ensacados se recomienda usarlos sobre base tapizada, evita deformación»), no comercial. Educar antes de incentivar protege el margen del catálogo de bases.</li>
-        <li><b>Ventana de 28 días alinea con la curva de adaptación del colchón.</b> A las 4 semanas el cliente ya tiene opinión sobre confort y nota molestias estructurales si la base actual no acompaña — momento idóneo para introducir el argumento.</li>
-        <li><b>El cupón en Email 2 (-5 %) sigue siendo modesto.</b> Coherente con la política Dormideo de descuentos pequeños y justificados, pero queda margen para testear -10 % o financiación 0 % en el segundo toque si la conversión es baja.</li>
-        <li><b>Asunto de Email 2 («¿Te vas a aprovechar?») es flojo.</b> Sin contexto, parece spam de marketplace. Versiones tipo «Tu colchón pide base — y un 5 %» o «Solo para clientes Dormideo: -5 % en bases» encajarían mejor con el framing personalizado del cuerpo.</li>
-        <li><b>Pendientes de confirmar:</b> ¿qué % del segmento «compró muelles sin base» entra realmente al flow?, ¿cuántos convierten antes del Día 28 por orgánico?, ¿hay variante para colchones viscoelásticos (donde la base tapizada también es válida, aunque menos crítica)?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 04 · CXA 90 Days -->
   <section class="flow" id="cxa-90-days">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 04</div>
-        <h2>CXA 90 Days</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 04</div>
+      <h2>CXA 90 Days</h2>
+      <div class="flow-sub">2 emails · 90–91 días</div>
     </div>
-
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Pedido pagado</dd>
-      </div>
-      <div class="cell">
-        <dt>Estructura</dt>
-        <dd>2 ramas paralelas por tag</dd>
-      </div>
-      <div class="cell">
-        <dt>Rama A · Día 90</dt>
-        <dd><code>comprador_colchon</code> → CSAT colchón</dd>
-      </div>
-      <div class="cell">
-        <dt>Rama B · Día 91</dt>
-        <dd><code>comprador_almohada</code> → CSAT almohada</dd>
-      </div>
-      <div class="cell">
-        <dt>Objetivo</dt>
-        <dd>Recoger feedback / NPS implícito</dd>
-      </div>
-    </dl>
 
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Pedido pagado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">A</div>
-          <div class="tl-day">DÍA 90</div>
-          <div class="tl-label">CSAT colchón</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">B</div>
-          <div class="tl-day">DÍA 91</div>
-          <div class="tl-label">CSAT almohada</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 90</div><div class="tl-label">CSAT colchón</div></div>
+        <div class="tl-node"><div class="tl-dot">2</div><div class="tl-day">DÍA 91</div><div class="tl-label">CSAT almohada</div></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">No son emails secuenciales: cada rama se evalúa de forma independiente según los tags del cliente. Un mismo cliente que haya comprado colchón <em>y</em> almohada recibirá ambos emails con un día de diferencia.</p>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/cxa-90-days/email-1.png" alt="Email 1 — CSAT colchón a 90 días" /></div>
+      <div class="email-shot"><img src="assets/cxa-90-days/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email 1 · Día 90 · Rama A (colchón)</div>
+        <div class="email-num">Email 1 · Día 90</div>
         <h3>¿Cómo estás durmiendo?</h3>
-        <div class="email-meta">
-          <span><b>Condición:</b> tag <code>comprador_colchon</code></span>
-          <span><b>Formato:</b> CSAT polar (positivo / negativo)</span>
-        </div>
-        <div class="email-copy">
-          <p>«{nombre}, ya han pasado 3 meses desde que compraste tu colchón y nos importa mucho tu satisfacción.»</p>
-          <p>«Así que con el fin de mejorar nuestro servicio, nos gustaría saber cómo ha sido <b>tu experiencia</b> con nosotros hasta día de hoy.»</p>
-          <div class="cta-line">CTA verde · Dejar comentario positivo &nbsp;·&nbsp; CTA rojo · Dejar comentario negativo</div>
-        </div>
+        <p class="email-summary">Email de feedback sobre la experiencia con el colchón a 3 meses.</p>
+        <div class="email-tags"><span><b>Día:</b> 90</span><span><b>CTA:</b> Comentario + / −</span></div>
       </div>
     </article>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/cxa-90-days/email-2.png" alt="Email 2 — CSAT almohada a 90 días" /></div>
+      <div class="email-shot"><img src="assets/cxa-90-days/email-2.png" alt="Email 2" /></div>
       <div class="email-body">
-        <div class="email-num">Email 2 · Día 91 · Rama B (almohada)</div>
+        <div class="email-num">Email 2 · Día 91</div>
         <h3>¿Qué tal con tu almohada?</h3>
-        <div class="email-meta">
-          <span><b>Condición:</b> tag <code>comprador_almohada</code></span>
-          <span><b>Formato:</b> CSAT polar (positivo / negativo)</span>
-        </div>
-        <div class="email-copy">
-          <p>«{nombre}, ya han pasado 3 meses desde que compraste tu almohada y nos importa mucho tu satisfacción.»</p>
-          <p>Copy idéntico al Email 1 con el sustantivo cambiado (almohada en lugar de colchón).</p>
-          <div class="cta-line">CTA verde · Dejar comentario positivo &nbsp;·&nbsp; CTA rojo · Dejar comentario negativo</div>
-        </div>
+        <p class="email-summary">Mismo formato que el Email 1 aplicado a la compra de almohada.</p>
+        <div class="email-tags"><span><b>Día:</b> 91</span><span><b>CTA:</b> Comentario + / −</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · CXA 90 Days</h3>
-      <ul>
-        <li><b>El flow funciona como recolector de reseñas, no como CXA propiamente dicho.</b> No hay rescate de detractores ni segunda acción para los promotores (cupón referidos, programa fidelidad, repeat purchase). El CTA negativo abre la puerta a la queja pero no hay evidencia de loop de recuperación documentado aquí.</li>
-        <li><b>Cliente que comprara colchón y almohada recibe los dos emails con 1 día de separación.</b> Es redundante: mismo formato, mismas dos preguntas binarias, mismos botones. Conviene fusionar en un email único con dos bloques o priorizar el producto de mayor valor.</li>
-        <li><b>El email 7 del flow Lead Nurturing usa exactamente el mismo template CSAT.</b> Allí está mal ubicado (lead que no compró) y aquí encaja, pero la duplicación visual hace que el cliente reciba el mismo creative varias veces a lo largo de su ciclo de vida. Conviene diferenciar al menos el subject y los CTAs.</li>
-        <li><b>90 días es ventana razonable para producto durable</b> (colchón / almohada): el cliente ya tiene experiencia consolidada y no opina sobre el «día 1». Bien calibrado.</li>
-        <li><b>Falta capturar score numérico.</b> Solo hay polar +/−. Pasar a escala 1–5 o NPS 0–10 daría más resolución para detectar tibios (compradores neutrales que son los más fáciles de mover con un cross-sell o programa de fidelización).</li>
-        <li><b>Pendientes de confirmar:</b> ¿dónde aterriza el clic en cada CTA?, ¿se redirige a Trustpilot/Google para los positivos y a soporte para los negativos?, ¿hay seguimiento manual de respuestas negativas o queda en buzón ciego?, ¿el flow re-tagea al cliente como `cxa_respondido` para evitar repetir el envío?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 05 · Babybed 50x80 -->
   <section class="flow" id="babybed-50x80">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 05</div>
-        <h2>Workflow upsells babybed 50×80</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 05</div>
+      <h2>Workflow upsells babybed 50×80</h2>
+      <div class="flow-sub">1 email · 60 días</div>
     </div>
 
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Pedido pagado (babybed 50×80)</dd>
-      </div>
-      <div class="cell">
-        <dt>Duración</dt>
-        <dd>60 días · 1 email</dd>
-      </div>
-      <div class="cell">
-        <dt>Filtro / Condición</dt>
-        <dd>Tag <code>comprador_babybed_50x80</code></dd>
-      </div>
-      <div class="cell">
-        <dt>Producto objetivo</dt>
-        <dd>Babybed 60×120 / 70×140 + colchones infantiles</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Cupón BABY10 (-10 %)</dd>
-      </div>
-    </dl>
-
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Pedido pagado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">DÍA 60</div>
-          <div class="tl-label">Upsell talla superior</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 60</div><div class="tl-label">Upsell talla superior</div></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Email único. Anticipa el momento en que el bebé empieza a quedarse pequeño en la cuna 50×80 — moment of need preciso.</p>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/babybed-50x80/email-1.png" alt="Email único — upsell babybed talla superior" /></div>
+      <div class="email-shot"><img src="assets/babybed-50x80/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email único · Día 60</div>
+        <div class="email-num">Email 1 · Día 60</div>
         <h3>{nombre}, tenemos algo exclusivo para ti</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> Sabemos que los más peques crecen muy rápido</span>
-          <span><b>Cupón:</b> BABY10 (-10 %)</span>
-        </div>
-        <div class="email-copy">
-          <p>«Hace unos meses comprasteis el Colchón Babybed y tenemos un <b>descuento</b> para ti.»</p>
-          <p>«Ahorra con la compra de tu <b>próximo colchón</b> y <b>anticípate</b> antes de que empiece a quedarse <b>pequeño</b>.» — Cupón destacado <b>CUPÓN 10 % DE DESCUENTO · BABY10</b>.</p>
-          <p>¿Qué opciones tienes?</p>
-          <p><b>1. Colchones de cuna de tamaño superior</b> — Babybed 60×120 y Babybed 70×140 (CTA «Comprar ya» en cada uno).</p>
-          <p><b>2. Colchones infantiles</b> — Colchón cama niño E*Denim Jeans y Colchón infantil E*Denim Jeans (Altura 15 cm / 21 cm).</p>
-          <div class="cta-line">CTA · Comprar ya (cada producto independiente)</div>
-        </div>
+        <p class="email-summary">Cupón <b>BABY10</b> (−10 %) sobre babybed talla superior (60×120 / 70×140) + colchones infantiles E*Denim Jeans 15 cm / 21 cm.</p>
+        <div class="email-tags"><span><b>Día:</b> 60</span><span><b>Final del flow</b></span><span><b>CTA:</b> Comprar ya</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Workflow upsells babybed 50×80</h3>
-      <ul>
-        <li><b>Mejor relación timing / mensaje de todos los flows analizados.</b> 60 días post-compra de un babybed 50×80 es exactamente cuando los padres empiezan a notar que el bebé se queda pequeño. El argumento «los más peques crecen muy rápido / anticípate» es psicológicamente preciso.</li>
-        <li><b>Es el único flow con descuento de doble dígito (-10 %).</b> Coherente: el ticket babybed es bajo, el segmento es pequeño, y la sustitución es inevitable. Maximizar conversión > proteger margen.</li>
-        <li><b>El email mezcla dos categorías de producto</b> (babybed talla superior <em>y</em> colchones infantiles). Acelera el LTV pero diluye la decisión — el padre del 50×80 no salta directamente a un colchón infantil de cama. Conviene priorizar babybed arriba (ya lo hace) y mover los infantiles a un Email 2 a los 9–12 meses.</li>
-        <li><b>Email único = una sola oportunidad.</b> Sin recordatorio ni follow-up con incentivo extra. Para un cupón que caduca «BABY10» sin fecha visible, un segundo toque a día 75 con urgencia («último mes para aprovechar BABY10») podría rescatar al cohort tibio.</li>
-        <li><b>Falta segmentación por mes de nacimiento del bebé.</b> El timing actual asume que todos los compradores del 50×80 son padres recientes en el mismo punto de la curva. No es del todo cierto — algunos compran de segunda mano, otros como regalo, otros con el bebé ya cerca de los 6 meses.</li>
-        <li><b>Pendientes de confirmar:</b> ¿hay exit condition por compra de babybed talla superior (tag <code>comprador_babybed_60x120</code> o <code>comprador_babybed_70x140</code>)?, ¿el cupón BABY10 tiene fecha de expiración o es perpetuo?, ¿se trackea el revenue atribuido al flow?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 06 · Babybed 60x120 / 70x140 -->
   <section class="flow" id="babybed-60x120-70x140">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 06</div>
-        <h2>Workflow upsells babybed 60×120 / 70×140</h2>
-      </div>
-      <span class="status active">Active</span>
+      <div class="kicker">Flow 06</div>
+      <h2>Workflow upsells babybed 60×120 / 70×140</h2>
+      <div class="flow-sub">1 email · 91 días</div>
     </div>
 
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Pedido pagado (babybed 60×120 o 70×140)</dd>
-      </div>
-      <div class="cell">
-        <dt>Duración</dt>
-        <dd>91 días · 1 email</dd>
-      </div>
-      <div class="cell">
-        <dt>Filtro / Condición</dt>
-        <dd>Tag <code>comprador_babybed_60x120</code> ∨ <code>comprador_babybed_70x140</code></dd>
-      </div>
-      <div class="cell">
-        <dt>Producto objetivo</dt>
-        <dd>Colchones infantiles (cama nido / cama)</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Cupón BABY10 (-10 %)</dd>
-      </div>
-    </dl>
-
     <div class="timeline">
-      <h3>Timing del flow</h3>
       <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Pedido pagado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">DÍA 91</div>
-          <div class="tl-label">Upsell colchón infantil</div>
-        </div>
+        <div class="tl-node trigger"><div class="tl-dot">·</div><div class="tl-day">DÍA 0</div><div class="tl-label">Inicio</div></div>
+        <div class="tl-node"><div class="tl-dot">1</div><div class="tl-day">DÍA 91</div><div class="tl-label">Upsell infantil</div></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Email único a 91 días. El producto objetivo ya no es otra cuna sino la siguiente categoría (cama infantil), por lo que la ventana se amplía respecto al 50×80.</p>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/babybed-60x120-70x140/email-1.png" alt="Email único — upsell a colchón infantil" /></div>
+      <div class="email-shot"><img src="assets/babybed-60x120-70x140/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email único · Día 91</div>
+        <div class="email-num">Email 1 · Día 91</div>
         <h3>{nombre}, tenemos algo exclusivo para ti</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> Sabemos que los más peques crecen muy rápido</span>
-          <span><b>Cupón:</b> BABY10 (-10 %)</span>
-        </div>
-        <div class="email-copy">
-          <p>«Hace unos meses comprasteis el Colchón Babybed y tenemos un <b>descuento</b> para ti.»</p>
-          <p>«Ahorra con la compra de su <b>próximo colchón</b> y <b>anticípate</b> antes de que empiece a quedarle <b>pequeño</b>.» — Cupón destacado <b>CUPÓN 10 % DE DESCUENTO · BABY10</b>.</p>
-          <p>«Los preferidos de nuestros clientes en tu situación:»</p>
-          <p>· <b>Colchón cama nido E*Denim Jeans</b> (Altura 15 cm) · 224,87 € → <b>112,43 €</b><br />
-             · <b>Colchón infantil E*Denim Jeans</b> (Altura 21 cm) · 253,34 € → <b>126,67 €</b></p>
-          <p>Cupón <b>BABY10</b> repetido al final del email.</p>
-          <div class="cta-line">CTA · Producto clicable (sin botón principal explícito)</div>
-        </div>
+        <p class="email-summary">Cupón <b>BABY10</b> (−10 %) sobre colchones infantiles E*Denim Jeans 15 cm (224,87 € → 112,43 €) y 21 cm (253,34 € → 126,67 €).</p>
+        <div class="email-tags"><span><b>Día:</b> 91</span><span><b>Final del flow</b></span><span><b>CTA:</b> —</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Workflow upsells babybed 60×120 / 70×140</h3>
-      <ul>
-        <li><b>Es la continuación lógica del Flow 05 (babybed 50×80).</b> Aquí ya no se vende otra cuna — se salta directamente a colchón infantil. Buena progresión de catálogo y refuerza el LTV a 2–3 años por familia.</li>
-        <li><b>Comparte cupón BABY10 con el Flow 05.</b> Si un cliente pasó por 50×80 → 60×120 → ahora infantil, ha recibido el mismo cupón al menos dos veces. Conviene rotar código o usar BABY-INF en este toque para diferenciar atribución y evitar fatiga.</li>
-        <li><b>Selección de producto idéntica a la segunda mitad del Flow 05.</b> Los dos modelos E*Denim Jeans (15 cm / 21 cm) son exactamente los mismos que aparecen en el babybed 50×80. Funcionalmente, el Flow 05 ya está haciendo este upsell — el cliente del 60×120 podría haber recibido los infantiles antes y ahora vuelve a verlos.</li>
-        <li><b>91 días es prudente.</b> El bebé de 60×120 / 70×140 todavía tiene meses por delante en esa cuna; anticipar la transición a cama es razonable, pero estamos al borde de ser demasiado pronto. La conversión a esa edad suele ser baja porque la decisión está lejos.</li>
-        <li><b>Sin segundo toque, sin urgencia.</b> Email único + cupón sin fecha → poca presión. Un follow-up a día 180 o un trigger por cumpleaños del bebé (si lo capturáramos) tendría mucho más impacto.</li>
-        <li><b>Pendientes de confirmar:</b> ¿hay exit por compra de colchón infantil (<code>comprador_colchon_infantil</code>)?, ¿se evita re-enviar a contactos que ya pasaron por el Flow 05?, ¿se podría capturar mes de nacimiento del bebé en pedido para personalizar la ventana?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 07 · Carrito abandonado -->
   <section class="flow" id="carrito-abandonado">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 07</div>
-        <h2>Carrito abandonado</h2>
-      </div>
-      <span class="status active">Active</span>
-    </div>
-
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Customer left online store without making a purchase</dd>
-      </div>
-      <div class="cell">
-        <dt>Estructura visible</dt>
-        <dd>1 email documentado</dd>
-      </div>
-      <div class="cell">
-        <dt>Producto en email</dt>
-        <dd>Detalle de carrito (resumen + CTA)</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Ninguno (sin descuento)</dd>
-      </div>
-      <div class="cell warn">
-        <dt>Timing / exit</dt>
-        <dd>Pendiente de auditar</dd>
-      </div>
-    </dl>
-
-    <div class="timeline">
-      <h3>Timing del flow</h3>
-      <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Carrito abandonado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">TBD</div>
-          <div class="tl-label">Recordatorio</div>
-        </div>
-      </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Los wait steps entre trigger y envío no están documentados en la vista compartida. Pendiente capturar timing y verificar si existen más emails en este flow.</p>
+      <div class="kicker">Flow 07</div>
+      <h2>Carrito abandonado</h2>
+      <div class="flow-sub">1 email</div>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/carrito-abandonado/email-1.png" alt="Email — recordatorio carrito" /></div>
+      <div class="email-shot"><img src="assets/carrito-abandonado/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email 1 · Día TBD</div>
+        <div class="email-num">Email 1</div>
         <h3>Has dejado artículos en tu carrito</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1 in-email:</b> ¡No pierdas tu compra!</span>
-          <span><b>Espera al siguiente:</b> TBD</span>
-        </div>
-        <div class="email-copy">
-          <p>Tono asistencial, sin urgencia ni descuento. Apertura: «Hemos notado que tu pedido todavía se encuentra pendiente de finalización, y queremos asegurarnos de que no pierdas la oportunidad de disfrutar del mejor descanso.»</p>
-          <p>«Sabemos lo importante que es para ti recibir tus productos a tiempo y queremos hacer todo lo posible para ayudarte a completar la compra con nosotros. Si experimentaste algún problema técnico o simplemente necesitas asistencia para finalizar tu pedido, ¡no te preocupes! Estamos aquí para ayudarte.»</p>
-          <p>Resumen del carrito con productos dinámicos (ejemplo capturado: Colchón Viscoelástico Thunder 80×180 / 21 cm · Cantidad 1; Colchón Viscoelástico Viscografeno New 80×180 · Cantidad 1).</p>
-          <p>Pie con instrucciones: «Para completar tu pedido, simplemente sigue estos sencillos pasos: 1. Haz clic en el botón de arriba…»</p>
-          <div class="cta-line">CTA · Ver carrito</div>
-        </div>
+        <p class="email-summary">Recordatorio con resumen del carrito (productos dinámicos) y CTA al checkout. Sin descuento.</p>
+        <div class="email-tags"><span><b>CTA:</b> Ver carrito</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Carrito abandonado</h3>
-      <ul>
-        <li><b>Typo visible en producción:</b> «Aquí tienes un <b>resum</b> de tu pedido» (falta la «-en»). Catalanismo o cadena truncada — fix textual inmediato.</li>
-        <li><b>Solo 1 email documentado en la auditoría.</b> Un carrito abandonado serio debería tener al menos 3 toques (T+1h, T+24h, T+72h) con escalado de incentivo en el tercero. Confirmar si existen más emails en este flow no capturados aquí.</li>
-        <li><b>Posible conflicto con Lead Nurturing.</b> El flow Lead Nurturing se dispara con «Customer abandons checkout» y este con «Customer left online store without making a purchase» — son audiencias parcialmente solapadas. Un usuario que añade al carrito y abandona en checkout puede entrar en ambos a la vez. Riesgo de doble envío del mismo recordatorio.</li>
-        <li><b>Cero incentivo es defensible pero conservador.</b> Para Dormideo (ticket alto, decisión meditada) tiene sentido no quemar margen en el primer toque. Si hay segundo o tercer email no documentado, el cupón debería aparecer ahí — verificar.</li>
-        <li><b>Copy reactivo y educado, sin urgencia ni anclaje de precio.</b> No menciona stock, no anclar al subtotal, no recuerda envío gratis ni 100 noches de prueba. Oportunidad clara de A/B.</li>
-        <li><b>Pendientes de confirmar:</b> ¿cuántos emails tiene el flow realmente?, ¿qué wait steps hay entre trigger y envíos?, ¿exit por compra está cableado?, ¿cómo coexiste con Lead Nurturing?, ¿se incluyen los reaseguros de marca (envío gratis, 100 noches, 10 años) en el cuerpo?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 08 · Pedido abandonado -->
   <section class="flow" id="pedido-abandonado">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 08</div>
-        <h2>Pedido abandonado</h2>
-      </div>
-      <span class="status active">Active</span>
-    </div>
-
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Customer abandons checkout</dd>
-      </div>
-      <div class="cell">
-        <dt>Estructura visible</dt>
-        <dd>1 email documentado</dd>
-      </div>
-      <div class="cell">
-        <dt>Producto en email</dt>
-        <dd>Detalles del pedido (productos + CTA)</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Ninguno (sin descuento)</dd>
-      </div>
-      <div class="cell warn">
-        <dt>Timing / exit</dt>
-        <dd>Pendiente de auditar</dd>
-      </div>
-    </dl>
-
-    <div class="timeline">
-      <h3>Timing del flow</h3>
-      <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Checkout abandonado</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">TBD</div>
-          <div class="tl-label">Recordatorio pedido</div>
-        </div>
-      </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Wait steps no documentados. Pendiente auditar si existen más emails.</p>
+      <div class="kicker">Flow 08</div>
+      <h2>Pedido abandonado</h2>
+      <div class="flow-sub">1 email</div>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/pedido-abandonado/email-1.png" alt="Email — recupera tu pedido" /></div>
+      <div class="email-shot"><img src="assets/pedido-abandonado/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email 1 · Día TBD</div>
+        <div class="email-num">Email 1</div>
         <h3>¡No te olvides de finalizar tu compra! El descanso perfecto te está esperando</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1:</b> ¡Recupera tu pedido y completa tu compra!</span>
-          <span><b>Espera al siguiente:</b> TBD</span>
-        </div>
-        <div class="email-copy">
-          <p>«Hemos notado que has dejado algunos artículos pendientes en tu carrito de compra, y queríamos recordarte que aún tienes la oportunidad de completar tu pedido.»</p>
-          <p>«No queremos que te pierdas de tus productos favoritos. ¡Aprovecha ahora y finaliza tu compra!»</p>
-          <p>Bloque <b>Detalles del pedido</b> con productos dinámicos (ejemplo capturado: Colchón Viscoelástico Thunder 80×180 / 21 cm · Cantidad 1; Colchón Viscoelástico Viscografeno New 80×180 · Cantidad 1).</p>
-          <p>Pie: «No pierdas más tiempo y completa tu pedido. Si tienes algún problema o pregunta, no dudes en ponerte en contacto con nuestro equipo de soporte.»</p>
-          <div class="cta-line">CTA primario · Continuar con el pago &nbsp;·&nbsp; CTA secundario · Visitar nuestra tienda</div>
-        </div>
+        <p class="email-summary">Recordatorio post-checkout con detalle del pedido (productos dinámicos) y vuelta al proceso de pago.</p>
+        <div class="email-tags"><span><b>CTA:</b> Continuar con el pago</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Pedido abandonado</h3>
-      <ul>
-        <li><b>Trigger duplicado con Lead Nurturing.</b> Ambos flows se disparan con <em>Customer abandons checkout</em>. El usuario que abandona el pago entra simultáneamente en Lead Nurturing (7 emails / 15 días, educativo) y en Pedido abandonado (recordatorio directo). Cero exclusión mutua documentada → riesgo alto de doble envío y mensajes contradictorios el mismo día.</li>
-        <li><b>Solapamiento de copy con Carrito abandonado.</b> Mismo planteamiento («hemos notado que…», resumen de productos, CTA a finalizar), distintos subject y H1. Un usuario podría recibir ambos por el mismo evento si el sistema interpreta carrito ↔ checkout indistintamente.</li>
-        <li><b>CTA primario es transaccional («Continuar con el pago»),</b> más fuerte que el del Carrito abandonado («Ver carrito»). Mejor calibrado para alguien que ya estaba pagando: lleva directo al paso siguiente, no a inspeccionar el carrito otra vez.</li>
-        <li><b>CTA secundario «Visitar nuestra tienda» distrae del objetivo.</b> Si el usuario abandona el checkout, devolverlo al catálogo entero baja la conversión. Conviene eliminar o cambiar a «Hablar con soporte» (atender la fricción real, que suele ser método de pago, entrega o talla).</li>
-        <li><b>Sin incentivo, sin urgencia, sin reaseguros.</b> Mismo patrón que Carrito abandonado: no menciona envío gratis, 100 noches, garantía, ni stock. Si solo hay 1 email en el flow, está dejando dinero en la mesa.</li>
-        <li><b>Pendientes de confirmar:</b> ¿cuántos emails reales tiene el flow?, ¿qué timing aplica?, ¿exit por compra está cableado?, ¿cómo se decide quién entra en este flow vs Lead Nurturing vs Carrito abandonado si los tres comparten señal de abandono?</li>
-      </ul>
-    </div>
   </section>
 
+  <!-- 09 · Navegación de producto abandonada -->
   <section class="flow" id="navegacion-abandonada">
     <div class="flow-head">
-      <div>
-        <div class="kicker">Flow 09</div>
-        <h2>Navegación de producto abandonada</h2>
-      </div>
-      <span class="status active">Active</span>
-    </div>
-
-    <dl class="flow-meta">
-      <div class="cell">
-        <dt>Trigger</dt>
-        <dd>Customer left online store without making a purchase</dd>
-      </div>
-      <div class="cell">
-        <dt>Estructura visible</dt>
-        <dd>1 email documentado</dd>
-      </div>
-      <div class="cell">
-        <dt>Producto en email</dt>
-        <dd>Último visto + recomendados</dd>
-      </div>
-      <div class="cell">
-        <dt>Incentivo</dt>
-        <dd>Envío gratis prime (producto seleccionado)</dd>
-      </div>
-      <div class="cell warn">
-        <dt>Timing / exit</dt>
-        <dd>Pendiente de auditar</dd>
-      </div>
-    </dl>
-
-    <div class="timeline">
-      <h3>Timing del flow</h3>
-      <div class="tl-track">
-        <div class="tl-node trigger">
-          <div class="tl-dot">·</div>
-          <div class="tl-day">DÍA 0</div>
-          <div class="tl-label">Sale sin convertir</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot">1</div>
-          <div class="tl-day">TBD</div>
-          <div class="tl-label">Producto visto + recos</div>
-        </div>
-      </div>
-      <p style="font-size:13px;color:var(--ink-soft);margin:4px 0 0;">Wait steps no documentados. Trigger comparte señal con Carrito abandonado — pendiente confirmar criterio que separa «vio producto» vs «añadió al carrito».</p>
+      <div class="kicker">Flow 09</div>
+      <h2>Navegación de producto abandonada</h2>
+      <div class="flow-sub">1 email</div>
     </div>
 
     <article class="email">
-      <div class="email-shot"><img src="assets/navegacion-abandonada/email-1.png" alt="Email — producto visto recientemente" /></div>
+      <div class="email-shot"><img src="assets/navegacion-abandonada/email-1.png" alt="Email 1" /></div>
       <div class="email-body">
-        <div class="email-num">Email 1 · Día TBD</div>
+        <div class="email-num">Email 1</div>
         <h3>¿No te ha gustado?</h3>
-        <div class="email-meta">
-          <span><b>Preview / H1 in-email:</b> ¿Ves algo que te guste?</span>
-          <span><b>Espera al siguiente:</b> TBD</span>
-        </div>
-        <div class="email-copy">
-          <p>Email compacto, sin párrafo de copy. Apertura directa con producto consultado (ejemplo capturado: <b>Colchón Viscoelástico Thunder</b>) + CTA «Ver producto».</p>
-          <p>Bloque «<b>Aprovecha envíos con prime en productos seleccionados</b>» con 3 productos recomendados (¡Nuevo! Colchón Ecológico EcoNature · ¡Nuevo! Colchón Viscoelástico City Luxury · Colchón Viscoelástico Thunder).</p>
-          <div class="cta-line">CTA principal · Ver producto &nbsp;·&nbsp; CTA secundario · Seguir comprando</div>
-        </div>
+        <p class="email-summary">Producto visto recientemente + 3 colchones recomendados. Mención envío prime.</p>
+        <div class="email-tags"><span><b>CTA:</b> Ver producto / Seguir comprando</span></div>
       </div>
     </article>
-
-    <div class="findings">
-      <h3>Hallazgos · Navegación de producto abandonada</h3>
-      <ul>
-        <li><b>Trigger idéntico al de Carrito abandonado</b> (<em>Customer left online store without making a purchase</em>). Sin un criterio adicional documentado (ej. <em>has viewed product</em> sin <em>added to cart</em>), no queda claro cómo se separa la audiencia entre los dos flows. Riesgo de doble envío.</li>
-        <li><b>Subject «¿No te ha gustado?» es flojo y proyecta culpa.</b> El usuario no tiene por qué haber rechazado el producto — solo no compró aún. «Sigues pensándolo? Mira lo que has visto» o «{nombre}, tu Colchón Thunder sigue aquí» convierte mejor.</li>
-        <li><b>Producto dinámico bien usado.</b> El email pivota sobre el último producto consultado (Thunder en el ejemplo), no sobre genéricos. Es la pieza más sólida del flow.</li>
-        <li><b>Recomendaciones cruzadas potencialmente solapadas.</b> Los 3 «recomendados» incluyen el mismo Colchón Thunder que ya aparece arriba. Conviene excluir el producto visto de la lista de recos para no repetir.</li>
-        <li><b>Mensaje «envíos con prime en productos seleccionados» es ambiguo.</b> Si el producto que viste no entra en «seleccionados», el mensaje crea fricción en lugar de aliviarla. Aclarar elegibilidad o aplicar solo cuando coincida con el producto visto.</li>
-        <li><b>Sin urgencia, sin descuento, sin reaseguros.</b> Patrón repetido en todos los flows de abandono. Mínimo añadir 100 noches de prueba y garantía como cinturón de seguridad cognitivo.</li>
-        <li><b>Pendientes de confirmar:</b> ¿qué criterio operativo separa este flow de Carrito abandonado?, ¿cuántos productos vistos disparan el flow?, ¿se excluye al usuario si añadió al carrito o si completó compra después?, ¿hay límite de envíos por usuario al mes para no fatigar a navegadores compulsivos?</li>
-      </ul>
-    </div>
-  </section>
-
-  <section style="margin-top: 80px; padding-top: 32px; border-top: 2px solid var(--ink);">
-    <div class="kicker">Síntesis transversal</div>
-    <h2 style="font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: 30px; margin: 6px 0 18px; letter-spacing: -0.01em;">Hallazgos a nivel de programa</h2>
-    <div class="findings" style="background: #f1eee5; border-left-color: var(--ink);">
-      <h3 style="color: var(--ink);">Patrones que se repiten en 9 flows</h3>
-      <ul>
-        <li><b>Tres flows comparten señal de abandono</b> (Lead Nurturing, Carrito abandonado, Pedido abandonado, Navegación de producto). Lead Nurturing y Pedido abandonado usan literalmente el mismo trigger («Customer abandons checkout»); Carrito y Navegación usan otro pero solapado («left online store without making a purchase»). Sin reglas de exclusión mutua visibles, un usuario que abandona checkout puede entrar en varios flows el mismo día. <b>Auditar matriz de exclusión es la prioridad número uno.</b></li>
-        <li><b>Lead Nurturing reporta 0 pedidos atribuidos en 30 días con 1.104 envíos.</b> Es la métrica más alarmante del programa. La hipótesis más razonable: nombre y trigger no cuadran, y el contenido educativo no resuelve la fricción concreta del usuario que abandonó en checkout (precio, entrega, método de pago). Replantear el flow entero o reasignar su trigger.</li>
-        <li><b>El template CSAT «positivo / negativo» se reutiliza en 2 flows</b> (Email 7 de Lead Nurturing y los 2 emails del CXA 90 Days). El mismo usuario puede recibir 3 versiones idénticas del mismo creative a lo largo de su ciclo. Diferenciar visualmente o consolidar.</li>
-        <li><b>Política de descuentos coherente y conservadora:</b> 5 % en cupones a clientes con producto principal (COLCHONES-5, DESCANSO5, BASES-5), 10 % solo en categoría baby (BABY10). Bien protege el margen pero el cupón único del baby está reusado en dos flows distintos — rotar a códigos diferentes para atribución limpia.</li>
-        <li><b>Los 4 flows post-compra usan la misma mecánica de tags</b> (<code>comprador_*</code>) con eficacias muy distintas: en Cross-selling almohadas y Up-selling base tapizada cierra el bucle perfectamente; en CXA 90 Days es solo discriminador de rama; en babybed la dependencia es asimétrica (entra por un tag, no se documenta exit por compra del producto objetivo). <b>Sin exit por compra documentada en los babybed, hay riesgo de enviar el upsell a clientes que ya hicieron la siguiente compra fuera del flow.</b></li>
-        <li><b>Tres flows de abandono envían 1 email visible cada uno.</b> Si son realmente single-touch, falta la cadencia típica de recuperación de carrito (T+1h, T+24h, T+72h con escalado de incentivo). Si tienen más emails, la auditoría está incompleta y conviene volver a capturar.</li>
-        <li><b>Cero reaseguros de marca en los emails de abandono</b> (Carrito, Pedido, Navegación). Dormideo tiene 100 noches de prueba, garantía 10 años, envío gratis — argumentos hechos para resolver fricciones de compra. No aparecen en los flows que más los necesitan.</li>
-        <li><b>Typo en producción:</b> «Aquí tienes un <b>resum</b> de tu pedido» en Carrito abandonado. Fix inmediato (catalanismo o cadena truncada).</li>
-        <li><b>Falta dashboard de revenue atribuido por flow.</b> Solo Lead Nurturing tiene KPIs visibles (sent / CTR / orders). Los otros 8 flows no se evalúan con métricas en esta auditoría. Imposible priorizar optimizaciones sin esto.</li>
-      </ul>
-    </div>
   </section>
 
   <footer class="site">
-    Dormideo Email Flows · Documento interno Incubalia · Generado 14 may 2026
+    Dormideo Email Flows · España · 14 may 2026
   </footer>
 
 </div>
